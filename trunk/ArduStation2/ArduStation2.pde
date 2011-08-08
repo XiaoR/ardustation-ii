@@ -14,8 +14,6 @@
 // Manual antenna control menu item is called ANT_TEST in the code, and called Antenna Test in the main menu
 // User should set tilt_pos_upper_limit and tilt_pos_lower_limit to stop the tilt from overshooting. Start with 0 and 180 and when in the antenna testing menu find out what the min and max should be for your setup and set those values in the code.
 
-
-
 #include <FastSerial.h>
 #include <GCS_MAVLink.h>
 #include <avr/pgmspace.h>
@@ -66,7 +64,7 @@ FastSerialPort0(Serial);
 #define EDIT_PARAM 10
 #define SAVE_PARAM 11
 
-#define TOTAL_PARAMS 37
+#define TOTAL_PARAMS 31
 
 LiquidCrystal lcd(2, 3, 4, 5, 6, 7, 8); //Initailizing LCD object (this is real C++).
 
@@ -97,8 +95,8 @@ int chg_angle = 0;
 int original_pan_pos = 90;
 int original_tilt_pos = 90;
 int original_chg_angle = 0;
-int tilt_pos_upper_limit = 150; // Upper tilt limit (antenna points to the sky)
-int tilt_pos_lower_limit = 50; //  Lower tilt limit (anntenna points straight ahead)
+#define tilt_pos_upper_limit 150 // Upper tilt limit (antenna points to the sky)
+#define tilt_pos_lower_limit 50 //  Lower tilt limit (anntenna points straight ahead)
 
 
 float Latitude_Home=0;
@@ -279,43 +277,43 @@ int get_Param_Key(char *buffer, int index)
 {
   switch (index)
   {
-    case 0: { strcpy_P(buffer, PSTR("ACR_RLL_P")); break; }
-    case 1: { strcpy_P(buffer, PSTR("ACR_RLL_I")); break; }
-    case 2: { strcpy_P(buffer, PSTR("ACR_RLL_D")); break; }
-    case 3: { strcpy_P(buffer, PSTR("ACR_RLL_IMAX")); break; }
-    case 4: { strcpy_P(buffer, PSTR("ACR_PIT_P")); break; }
-    case 5: { strcpy_P(buffer, PSTR("ACR_PIT_I")); break; }
-    case 6: { strcpy_P(buffer, PSTR("ACR_PIT_D")); break; } 
-    case 7: { strcpy_P(buffer, PSTR("ACR_PIT_IMAX")); break; }
-    case 8: { strcpy_P(buffer, PSTR("ACR_YAW_P")); break; }
-    case 9: { strcpy_P(buffer, PSTR("ACR_YAW_I")); break; }
-    case 10: { strcpy_P(buffer, PSTR("ACR_YAW_D")); break; }
-    case 11: { strcpy_P(buffer, PSTR("ACR_YAW_IMAX")); break; }
-    case 12: { strcpy_P(buffer, PSTR("STB_RLL_P")); break; }
-    case 13: { strcpy_P(buffer, PSTR("STB_RLL_I")); break; }
-    case 14: { strcpy_P(buffer, PSTR("STB_RLL_D")); break; }
-    case 15: { strcpy_P(buffer, PSTR("STB_RLL_IMAX")); break; }
-    case 16: { strcpy_P(buffer, PSTR("STB_PIT_P")); break; }
-    case 17: { strcpy_P(buffer, PSTR("STB_PIT_I")); break; }
-    case 18: { strcpy_P(buffer, PSTR("STB_PIT_D")); break; }
-    case 19: { strcpy_P(buffer, PSTR("STB_PIT_IMAX")); break; }
-    case 20: { strcpy_P(buffer, PSTR("STB_YAW_P")); break; }
-    case 21: { strcpy_P(buffer, PSTR("STB_YAW_I")); break; }
-    case 22: { strcpy_P(buffer, PSTR("STB_YAW_D")); break; }
-    case 23: { strcpy_P(buffer, PSTR("STB_YAW_IMAX")); break; }
-    case 24: { strcpy_P(buffer, PSTR("NAV_LAT_P")); break; }
-    case 25: { strcpy_P(buffer, PSTR("NAV_LAT_I")); break; }
-    case 26: { strcpy_P(buffer, PSTR("NAV_LAT_D")); break; }
-    case 27: { strcpy_P(buffer, PSTR("NAV_LAT_IMAX")); break; }
-    case 28: { strcpy_P(buffer, PSTR("NAV_LON_P")); break; }
-    case 29: { strcpy_P(buffer, PSTR("NAV_LON_I")); break; }
-    case 30: { strcpy_P(buffer, PSTR("NAV_LON_D")); break; }
-    case 31: { strcpy_P(buffer, PSTR("NAV_LON_IMAX")); break; }
-    case 32: { strcpy_P(buffer, PSTR("NAV_WP_P")); break; }
-    case 33: { strcpy_P(buffer, PSTR("NAV_WP_I")); break; }
-    case 34: { strcpy_P(buffer, PSTR("NAV_WP_D")); break; }
-    case 35: { strcpy_P(buffer, PSTR("NAV_WP_IMAX")); break; }
-    case 36: { strcpy_P(buffer, PSTR("MAG_ENABLE")); break; }
+    case 0: { strcpy_P(buffer, PSTR("RATE_RLL_P")); break; }
+    case 1: { strcpy_P(buffer, PSTR("RATE_RLL_I")); break; }
+    //case 2: { strcpy_P(buffer, PSTR("RATE_RLL_D")); break; }
+    case 2: { strcpy_P(buffer, PSTR("RATE_RLL_IMAX")); break; }
+    case 3: { strcpy_P(buffer, PSTR("RATE_PIT_P")); break; }
+    case 4: { strcpy_P(buffer, PSTR("RATE_PIT_I")); break; }
+    //case 6: { strcpy_P(buffer, PSTR("RATE_PIT_D")); break; } 
+    case 5: { strcpy_P(buffer, PSTR("RATE_PIT_IMAX")); break; }
+    case 6: { strcpy_P(buffer, PSTR("RATE_YAW_P")); break; }
+    case 7: { strcpy_P(buffer, PSTR("RATE_YAW_I")); break; }
+    //case 10: { strcpy_P(buffer, PSTR("RATE_YAW_D")); break; }
+    case 8: { strcpy_P(buffer, PSTR("RATE_YAW_IMAX")); break; }
+    case 9: { strcpy_P(buffer, PSTR("STB_RLL_P")); break; }
+    case 10: { strcpy_P(buffer, PSTR("STB_RLL_I")); break; }
+    //case 14: { strcpy_P(buffer, PSTR("STB_RLL_D")); break; }
+    case 11: { strcpy_P(buffer, PSTR("STB_RLL_IMAX")); break; }
+    case 12: { strcpy_P(buffer, PSTR("STB_PIT_P")); break; }
+    case 13: { strcpy_P(buffer, PSTR("STB_PIT_I")); break; }
+    //case 18: { strcpy_P(buffer, PSTR("STB_PIT_D")); break; }
+    case 14: { strcpy_P(buffer, PSTR("STB_PIT_IMAX")); break; }
+    case 15: { strcpy_P(buffer, PSTR("STB_YAW_P")); break; }
+    case 16: { strcpy_P(buffer, PSTR("STB_YAW_I")); break; }
+    //case 22: { strcpy_P(buffer, PSTR("STB_YAW_D")); break; }
+    case 17: { strcpy_P(buffer, PSTR("STB_YAW_IMAX")); break; }
+    case 18: { strcpy_P(buffer, PSTR("NAV_LAT_P")); break; }
+    case 19: { strcpy_P(buffer, PSTR("NAV_LAT_I")); break; }
+    case 20: { strcpy_P(buffer, PSTR("NAV_LAT_D")); break; }
+    case 21: { strcpy_P(buffer, PSTR("NAV_LAT_IMAX")); break; }
+    case 22: { strcpy_P(buffer, PSTR("NAV_LON_P")); break; }
+    case 23: { strcpy_P(buffer, PSTR("NAV_LON_I")); break; }
+    case 24: { strcpy_P(buffer, PSTR("NAV_LON_D")); break; }
+    case 25: { strcpy_P(buffer, PSTR("NAV_LON_IMAX")); break; }
+    case 26: { strcpy_P(buffer, PSTR("NAV_WP_P")); break; }
+    case 27: { strcpy_P(buffer, PSTR("NAV_WP_I")); break; }
+    case 28: { strcpy_P(buffer, PSTR("NAV_WP_D")); break; }
+    case 29: { strcpy_P(buffer, PSTR("NAV_WP_IMAX")); break; }
+    case 30: { strcpy_P(buffer, PSTR("MAG_ENABLE")); break; }
     default: { return -1; }
   }
   return 0;
@@ -967,7 +965,7 @@ void list_params()
 
 void position_antenna()
 {
-      Distance_Home=calc_dist(Latitude_Home, Longitud_Home, latitude, longitude);
+    Distance_Home=calc_dist(Latitude_Home, Longitud_Home, latitude, longitude);
     Bearing_Home=calc_bearing(Latitude_Home, Longitud_Home, latitude, longitude);
     SvBearingHome=Bearing_Home;
     Angle_Home=ToDeg(atan((float)(altitude-Altitude_Home)/(float)Distance_Home));
