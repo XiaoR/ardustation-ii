@@ -14,6 +14,9 @@
 // Manual antenna control menu item is called ANT_TEST in the code, and called Antenna Test in the main menu
 // User should set tilt_pos_upper_limit and tilt_pos_lower_limit to stop the tilt from overshooting. Start with 0 and 180 and when in the antenna testing menu find out what the min and max should be for your setup and set those values in the code.
 
+// If you edit this code please add comments and increment the version number.
+// Version: 2.0.03
+
 #include <FastSerial.h>
 #include <GCS_MAVLink.h>
 #include <avr/pgmspace.h>
@@ -364,15 +367,7 @@ void gcs_update()
     }
 }
 
-void gcs_handleMessageSysStatus(mavlink_message_t* msg)
-{
-  mavlink_sys_status_t packet;
-  mavlink_msg_sys_status_decode(msg, &packet);
-  currentSMode = packet.mode;
-  currentNMode = packet.nav_mode;
-  battery = packet.vbat;
-  return;  
-}
+
 
 void gcs_handleMessage(mavlink_message_t* msg)
 {
@@ -420,11 +415,12 @@ void gcs_handleMessage(mavlink_message_t* msg)
     }
     case MAVLINK_MSG_ID_SYS_STATUS:
     {
-      gcs_handleMessageSysStatus(msg);
+
       mavlink_sys_status_t packet;
       mavlink_msg_sys_status_decode(msg, &packet);
       currentSMode = packet.mode;
       currentNMode = packet.nav_mode;
+      battery = packet.vbat;
       break;
     }
     case MAVLINK_MSG_ID_PARAM_VALUE:
@@ -715,8 +711,8 @@ void flight_data() // menu 1
         lcd_print_P(PSTR("LN:"));
         lcd.print(longitude,3);
         lcd.setCursor(10,3);
-         lcd_print_P(PSTR("BT:"));
-        lcd.print(battery);
+        lcd_print_P(PSTR("BT:"));
+        lcd.print(battery/1000);
         break;
       }
       case 1:
