@@ -48,7 +48,8 @@ void flight_data() // menu 1
         
         lcd.setCursor(10,3); 
         lcd_print_P(PSTR("BT:"));
-        lcd.print(battery);
+        lcd.print(battery/1000);
+        lcd_print_P(PSTR("V"));
 
         break;
       }
