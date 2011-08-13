@@ -9,22 +9,27 @@
 // for development and testing. 
 // RAM is really tight so I had to remove the PID modification for Ardupilot Mega.
 // 
-// Modified to add battery monitoring, and manual antenna control by Hai Tran (hai@itsecurity.net.au) 4 August 2011
+// 
+// v2.0.03 Modified to add battery monitoring, and manual antenna control by Hai Tran (hai@itsecurity.net.au) 4 August 2011
 // Cleaned up references to PIDS menu and replaced with Antenna Stop menu (ANTS)
 // Manual antenna control menu item is called ANT_TEST in the code, and called Antenna Test in the main menu
 // User should set tilt_pos_upper_limit and tilt_pos_lower_limit to stop the tilt from overshooting. Start with 0 and 180 and when in the antenna testing menu find out what the min and max should be for your setup and set those values in the code.
 
-// Added conversion factor for display meters vs feet
+// v2.0.05 Added conversion factor for display meters vs feet
 // Added JeffE's reformat of flight data display
 // Removed one debug flight data display (Heino Pull) 8/11/2011
 
-//Clean up code for easier code handling if needed to edit in future
-//Tabs added Antenna / EEPROM / Flight_Data / MAV_Link / Params
-//Added GPS Fix indicator
-//Jeff E 8/12/2011
+// Clean up code for easier code handling if needed to edit in future
+// Tabs added Antenna / EEPROM / Flight_Data / MAV_Link / Params
+// Added GPS Fix indicator
+// Jeff E 8/12/2011
+
+// v2.0.06 Increased the text label of the params from 10 chars to 12 chars by removing the 
+// Trailing "<" that identifies the current selected param, also remove one blank char space
+// this makes it easier to determine which param field is selected.
 
 // If you edit this code please add comments and increment the version number.
-// Version: 2.0.05
+// Current Version: 2.0.06
 
 #include <FastSerial.h>
 #include <GCS_MAVLink.h>

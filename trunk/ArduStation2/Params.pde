@@ -118,14 +118,14 @@ void list_params()
     {
       lcd.setCursor(0,i);
       EEPROM_readParameter((i + (currentOption/4 * 4)) * sizeof(temp), temp);
-      if (strlen(temp.key)<10)
+      if (strlen(temp.key)<13)
         lcd.print(temp.key);
       else
       {
-        for (int i=0; i<9; i++)
+        for (int i=0; i<12; i++)
           lcd.print(temp.key[i]);
       }
-      lcd.setCursor(10,i);
+      lcd.setCursor(12,i);
       if (i == currentOption%4)
       {
         lcd.print(">");
@@ -135,8 +135,8 @@ void list_params()
       else
         lcd.print(" ");
       lcd.print(temp.value);
-      if (i == currentOption%4)
-        lcd.print("<");
+      //if (i == currentOption%4)
+        //lcd.print("<");
     }
   }
   redraw = 0;
@@ -145,17 +145,17 @@ void list_params()
 void edit_params()
 {
   lcd.clear();
-  if (strlen(editParm.key)<10)
+  if (strlen(editParm.key)<13)
     lcd.print(editParm.key);
   else
   {
-    for (int i=0; i<9; i++)
+    for (int i=0; i<12; i++)
       lcd.print(editParm.key[i]);
   }
-  lcd.setCursor(10,0);
+  lcd.setCursor(12,0);
   lcd.print(">");
   lcd.print(editParm.value);
-  lcd.print("<");
+  //lcd.print("<");
   lcd.setCursor(0,1);
   lcd_print_P(PSTR("Up/Down -> +/- .01"));
   lcd.setCursor(0,2);
