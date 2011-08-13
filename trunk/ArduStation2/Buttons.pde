@@ -177,7 +177,7 @@ void Check_Buttons(byte max_options) //Reading the buttons.
         redraw = 1;
       }
       else{
-         subMenu=3;
+         subMenu=2;
          redraw=1;
       }
     }
@@ -210,17 +210,23 @@ void Check_Buttons(byte max_options) //Reading the buttons.
       {
         menu = STOP_FEEDS;
       }
-      else if (currentOption == 2) // flight data
-      {
-        menu = FLIGHT_DATA;
-        subMenu = 0;
-        redraw = 1;
-      }
-      else if (currentOption == 3) // Antenna Stop
+
+      else if (currentOption == 2) // Antenna Stop
       {
         pan_pos = 90;
         tilt_pos = 90;
         menu = ANTS;
+        subMenu = 0;
+        redraw = 1;
+      }
+      else if (currentOption == 3) // Antenna Test
+      {
+        original_pan_pos = pan_pos;
+        original_tilt_pos = tilt_pos;
+        original_chg_angle = chg_angle;
+        pan_pos = 90;
+        tilt_pos = 90;
+        menu = ANT_TEST;
         subMenu = 0;
         redraw = 1;
       }
@@ -239,22 +245,18 @@ void Check_Buttons(byte max_options) //Reading the buttons.
         currentOption = 0;        
         redraw = 1;
       }
-      else if (currentOption == 6) // init_eeprom
+      else if (currentOption == 6) // flight data
+      {
+        menu = FLIGHT_DATA;
+        subMenu = 0;
+        redraw = 1;
+      }
+      else if (currentOption == 7) // init_eeprom
       {
         menu = INIT_EEPROM;
         redraw = 1;
       }
-      else if (currentOption == 7) // Antenna Test
-      {
-        original_pan_pos = pan_pos;
-        original_tilt_pos = tilt_pos;
-        original_chg_angle = chg_angle;
-        pan_pos = 90;
-        tilt_pos = 90;
-        menu = ANT_TEST;
-        subMenu = 0;
-        redraw = 1;
-      }
+
     }
     else if (menu == EDIT_VIEW_PARAMS) // edit single param based on current option
     {
@@ -268,7 +270,7 @@ void Check_Buttons(byte max_options) //Reading the buttons.
       timeOut = 100;
       redraw = 1;
     }
-    else if ((menu==FLIGHT_DATA) && (subMenu==3))
+    else if ((menu==FLIGHT_DATA) && (subMenu==2))
     {
       SaveHomePosition();
     }
@@ -283,7 +285,7 @@ void Check_Buttons(byte max_options) //Reading the buttons.
   {
     if (menu == FLIGHT_DATA)
     {
-      if (subMenu < 3) {
+      if (subMenu < 2) {
         redraw=1;
         subMenu++;
       }
