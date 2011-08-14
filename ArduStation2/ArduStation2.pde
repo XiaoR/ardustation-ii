@@ -87,8 +87,8 @@ FastSerialPort0(Serial);
 
 #define TOTAL_PARAMS 31
 
-//#define DIST_CONV 1.0   // For distance display in meters choose 0.0, for feet 
-#define DIST_CONV 0.0
+#define DIST_CONV 1.0   // For distance display in meters choose 0.0, for feet 3.2808
+
 
 LiquidCrystal lcd(2, 3, 4, 5, 6, 7, 8); //Initailizing LCD object (this is real C++).
 
