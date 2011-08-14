@@ -32,8 +32,10 @@
 // Change on tab 1 - dir to aircraft from home (pan position) needs svbearinghome to get right value. Tested both values on the readymaderc hardware.
 // Heino Pull 8/13/2011
 
+// v2.0.08 Fix metre/feet dist conv setting.  Default is now metric
+
 // If you edit this code please add comments and increment the version number.
-// Current Version: 2.0.07
+// Current Version: 2.0.08
 
 #include <FastSerial.h>
 #include <GCS_MAVLink.h>
