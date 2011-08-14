@@ -28,8 +28,12 @@
 // Trailing "<" that identifies the current selected param, also remove one blank char space
 // this makes it easier to determine which param field is selected.
 
+// v2.0.07 Changed displayed values on tab 1 of flight data - needed to double the bearing value - the actual value is wrt the servo angle from Arduino (0-180) need (0-360) - bearing back to home
+// Change on tab 1 - dir to aircraft from home (pan position) needs svbearinghome to get right value. Tested both values on the readymaderc hardware.
+// Heino Pull 8/13/2011
+
 // If you edit this code please add comments and increment the version number.
-// Current Version: 2.0.06
+// Current Version: 2.0.07
 
 #include <FastSerial.h>
 #include <GCS_MAVLink.h>

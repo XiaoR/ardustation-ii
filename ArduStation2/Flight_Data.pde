@@ -44,7 +44,7 @@ void flight_data() // menu 1
 
         lcd.setCursor(0,3); 
         lcd_print_P(PSTR("BR:"));
-        lcd.print(Bearing_Home); 
+        lcd.print(Bearing_Home*2.0); 
         
         lcd.setCursor(10,3); 
         lcd_print_P(PSTR("BT:"));
@@ -73,7 +73,7 @@ void flight_data() // menu 1
       lcd.setCursor(0, 3);
       
       lcd_print_P(PSTR("Dir~"));
-      lcd.print(Bearing_Home);
+      lcd.print(SvBearingHome);
       lcd.setCursor(10, 0);
       
       lcd_print_P(PSTR("D3D~"));
